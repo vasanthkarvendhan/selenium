@@ -1,0 +1,29 @@
+package selenium1;
+
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class testlogo {
+
+	public static void main(String[] args) {
+  	   System.setProperty("webdriver.chrome.driver","C:\\Users\\User\\eclipse-workspace\\selenium pp1\\src\\drivers\\chromedriver.exe");
+        WebDriver driver=new ChromeDriver();
+        
+        driver.get("http://www.demo.guru99.com/V4/");
+        driver.findElement(By.name("uid")).sendKeys("mngr304188");
+        driver.findElement(By.name("password")).sendKeys("jahatus");
+        driver.findElement(By.name("btnLogin")).click();
+        
+        String actualUrl="http://www.demo.guru99.com/V4/manager/Managerhomepage.php";
+        String expectedUrl= driver.getCurrentUrl();
+        
+        if(actualUrl.equalsIgnoreCase(expectedUrl))
+        {
+        	System.out.println("test passed");
+        }
+        else
+        {
+        	System.out.println("test failed");
+        }
+        driver.quit();
+	}
