@@ -1,0 +1,47 @@
+package drivers;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Dropdown {
+	public static void main(String[] args) throws InterruptedException
+	{	
+		
+		
+    System.setProperty("webdriver.chrome.driver","C:\\Users\\User\\eclipse-workspace\\SELENIUM11\\src\\drivers\\chromedriver.exe");
+    WebDriver driver=new ChromeDriver();
+    driver.get("https://rahulshettyacademy.com/dropdownsPractise/");
+    driver.findElement(By.id("divpaxinfo")).click();
+         Thread.sleep(1000L);
+    int i=1;
+   // while(i<4)
+    for(i=1;i<4;i++)
+    {
+    	driver.findElement(By.id("hrefIncAdt")).click();
+    	
+    }
+    driver.findElement(By.className("buttonN")).click();
+    System.out.println(driver.findElement(By.className("paxinfo")).getText());
+
+    
+    
+   
+    
+    
+    // end to end validation
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+}
+}
