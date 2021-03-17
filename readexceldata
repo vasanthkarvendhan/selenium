@@ -1,0 +1,53 @@
+package drivers;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import org.apache.poi.xssf.*;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class Seleniumexceldata {
+
+	public static void main(String[] args) throws Exception {
+		
+		File src=new File("C:\\Users\\User\\Desktop\\Exceldata\\testdata.xlsx");
+		FileInputStream fis=new FileInputStream(src);
+		XSSFWorkbook wb=new XSSFWorkbook(fis);
+		XSSFSheet sheet1=wb.getSheetAt(0);
+		int rowcount=sheet1.getLastRowNum();
+		
+		for(int i=0;i<rowcount;i++)
+		{
+			String dataa=sheet1.getRow(i).getCell(0).getStringCellValue();
+			
+			System.out.println(dataa);
+		}
+		
+		
+		
+		wb.close();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		//String data=sheet1.getRow(0).getCell(0).getStringCellValue();
+		//System.out.print(data);
+		
+		
+		
+		
+	}
+
+}
