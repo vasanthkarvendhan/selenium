@@ -1,0 +1,48 @@
+
+
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
+
+public class Filterwebtable {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver",
+				"C:\\Users\\User\\eclipse-workspace\\SELENIUM11\\src\\drivers\\chromedriver.exe");
+		WebDriver driver = new ChromeDriver();
+		//driver.get("https://rahulshettyacademy.com/AutomationPractice/");
+	    driver.get("https://rahulshettyacademy.com/seleniumPractise/#/offers");
+	    driver.findElement(By.id("search-field")).sendKeys("Rice");
+	    List<WebElement> veg=driver.findElements(By.xpath("//tr/td[1]"));
+	   List<WebElement> filterList= veg.stream().filter(vegs->vegs.getText().contains("Rice")).collect(Collectors.toList());
+	    Assert.assertEquals(veg.size(), filterList.size());
+	    
+	   
+	    
+	    
+	    
+	    
+	}
+
+}
+
+		
+		
+		
+		
+		//String data=sheet1.getRow(0).getCell(0).getStringCellValue();
+		//System.out.print(data);
+		
+		
+		
+		
+	}
+
+}
