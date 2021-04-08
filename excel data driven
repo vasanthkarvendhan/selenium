@@ -3,44 +3,81 @@ package vasanth;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.util.NumberToTextConverter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class Datadriven {
 
+	
+	public ArrayList<String> getData(String testcaseName) throws IOException {
+		FileInputStream file= new FileInputStream("C:\\Users\\User\\Desktop\\data\\testcases.xlsx");
+	       XSSFWorkbook workbook= new XSSFWorkbook(file);
+	       
+	       ArrayList<String> a=new ArrayList<String>();
+	       
+	       int sheets=workbook.getNumberOfSheets();
+	       for(int i=0;i<sheets;i++)
+	       {
+	    	   if(workbook.getSheetName(i).equalsIgnoreCase("datasheet1"))
+	    	   {
+	    		   XSSFSheet sheet=workbook.getSheetAt(i);
+	    	   Iterator<Row> rows=sheet.iterator();
+	    	   Row firstrow=rows.next();
+	    	   Iterator<Cell> col=firstrow.cellIterator();
+	    	   int k=0,coloumn=0;
+	    	   while(col.hasNext())
+	    	   {
+	    		   Cell value=col.next();
+	    		   if(value.getStringCellValue().equalsIgnoreCase("testcases"))
+	    		   {
+	    			   coloumn=k;
+	    		   }
+	    		   k++;
+	    	   }
+	    	   System.out.println(coloumn);
+	    	   while(rows.hasNext())
+	    	   {
+	    		   Row r=rows.next();
+	    		   if(r.getCell(coloumn).getStringCellValue().equalsIgnoreCase(testcaseName))
+	    		   {
+	    			   Iterator<Cell> cv=r.iterator();
+	    			   while(cv.hasNext())
+	    			   {
+	    				   Cell c=cv.next();
+	    				   if(c.getCellType()==CellType.STRING)
+	    				   {
+	    				   a.add(c.getStringCellValue());
+	    				   }
+	    				   else
+	    				   {
+	    					  a.add( NumberToTextConverter.toText(c.getNumericCellValue()));
+	    					   
+	    				   }
+	    				   
+	    				   
+	    			   }
+	    		   }
+	    	   }
+	    	   
+	    	   return a;
+	    	   }
+	       }
+	       return a;
+		
+	}
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		FileInputStream file= new FileInputStream("C:\\Users\\User\\Desktop\\data\\testcases.xlsx");
-       XSSFWorkbook workbook= new XSSFWorkbook(file);
-       int sheets=workbook.getNumberOfSheets();
-       for(int i=0;i<sheets;i++)
-       {
-    	   if(workbook.getSheetName(i).equalsIgnoreCase("datasheet1"))
-    	   {
-    		   XSSFSheet sheet=workbook.getSheetAt(i);
-    	   Iterator<Row> rows=sheet.iterator();
-    	   Row firstrow=rows.next();
-    	   Iterator<Cell> col=firstrow.cellIterator();
-    	   int k=0,coloumn=0;
-    	   while(col.hasNext())
-    	   {
-    		   Cell value=col.next();
-    		   if(value.getStringCellValue().equalsIgnoreCase("testcases"))
-    		   {
-    			   coloumn=k;
-    		   }
-    		   k++;
-    	   }
-    	   System.out.println(coloumn);
-    	   
-    	   }
-       }
+		
+       
        
        
 	}
-
+	
 }
